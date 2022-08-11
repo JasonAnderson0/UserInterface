@@ -91,5 +91,5 @@ MonoBehaviour:
   itemUI: {fileID: 212662652568424707, guid: 8db879fc2bc08f64d9cdc40a56b1b164, type: 3}
   parentInventory: {fileID: 749452249024775843, guid: fd8e73a5a2d362f45a760d30b10ae719,
     type: 3}
-  index: 2
+  index: 0
   item: {fileID: 212662652568424707, guid: 8db879fc2bc08f64d9cdc40a56b1b164, type: 3}

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: SevenLeagueBoots
   m_EditorClassIdentifier: 
   itemName: Seven League Boots
-  description: Footwear that alows trhe user to jump incredible distances
+  type: 3
   icon: {fileID: 21300000, guid: bcd236abfb7a65d499e8ce6c8bc0a896, type: 3}
   color: {r: 0, g: 1, b: 0.12585473, a: 1}

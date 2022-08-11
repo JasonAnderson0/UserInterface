@@ -7,7 +7,8 @@ public class Timer : MonoBehaviour
 {
     Slider timer;
     public int cooldown;
-    float lastHit;
+    [HideInInspector]
+    public float lastHit;
     public Fighter enemy;
     public Fighter player;
 

@@ -25,5 +25,6 @@ public class Slot : MonoBehaviour
 
         // update the front end array
         itemUI.SetItem(item);
+        //item.transform.SetParent(this, true);
     }
 }

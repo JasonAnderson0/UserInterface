@@ -13,9 +13,17 @@ public class ShopItemUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
     public bool dragging;
     public Transform originalParent;
     public Canvas canvas;
+    Enemy enemy;
+    Fighter player;
     List<RaycastResult> hits = new List<RaycastResult>();
 
     public Slot slot;
+
+    void Start()
+    {
+        enemy = GameManager.instance.enemy;
+        player = GameManager.instance.player;
+    }
 
     public void SetItem(ShopItem i)
     {
@@ -49,7 +57,6 @@ public class ShopItemUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
     {
         if (originalParent == null) originalParent = transform.parent;
         if (canvas == null) canvas = GetComponentInParent<Canvas>();
-        transform.SetParent(canvas.transform, true);
         transform.SetAsLastSibling();
         dragging = true;
     }
@@ -66,26 +73,21 @@ public class ShopItemUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
         EventSystem.current.RaycastAll(eventData, hits);
         foreach(RaycastResult hit in hits)
         {
-            //TODO: found out how the slots item is assigned then get it to swap.
-            //Change second inventory to single item inventory and have it as "Active" item.
-            //When switched check it against enemy type (add enemy types)
+
             Slot s = hit.gameObject.GetComponent<Slot>();
-            if (s && s.item == null)
-            {
-                slotFound = s;
-                transform.position = slotFound.transform.position;
-                Debug.Log("Hit");
-            }
-            else if(s && s.item != null)
+            if(s && s.item)
             {
                 slotFound = s;
                 Swap(slotFound);
                 transform.position = slotFound.transform.position;
-                Debug.Log("Swapped");
+
+                //transform.SetAsLastSibling();
+                if (slotFound.transform.parent != transform.parent && enemy.Check(item))
+                    enemy.Hit(player.damage);
             }
             else
             {
-
+                transform.position = transform.parent.transform.position;
             }
         }
     }

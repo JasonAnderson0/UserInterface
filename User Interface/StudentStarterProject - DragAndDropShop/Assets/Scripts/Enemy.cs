@@ -6,17 +6,38 @@ using UnityEngine.UI;
 public class Enemy : Fighter
 {
     public Color[] sprites;
+    int lastIndex;
     int index;
     public Image enemy;
+    public Type type;
+
+    public override void Hit(int damage)
+    {
+        base.Hit(damage);
+        ChangeIndex();
+    }
 
     public override void Die()
     {
-        index++;
+        GameManager.instance.timer.lastHit = GameManager.instance.timer.cooldown;
+        health = maxHealth;
+        UpdateUI();
+    }
+
+    void ChangeIndex()
+    {
+        index = Random.Range(0,4);
         if (index == sprites.Length)
             index = 0;
 
         enemy.color = sprites[index];
-        health = maxHealth;
-        UpdateUI();
+        type = (Type)index;
+
+        lastIndex = index;
+    }
+
+    public bool Check(ShopItem compare)
+    {
+        return (compare.type == type);
     }
 }
